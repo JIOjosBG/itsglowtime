@@ -17,6 +17,7 @@ def apiOverview(request):
 
 @api_view(['GET'])
 def alarmList(request):
-    alarms = Alarm.objects.all()
+    alarms = Alarm.objects.all().order_by('time')
     serializer = AlarmSerializer(alarms,many=True)
+    
     return Response(serializer.data)
