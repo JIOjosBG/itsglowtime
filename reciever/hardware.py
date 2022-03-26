@@ -19,7 +19,22 @@ def display_time(t):
     #     print('\n')
     #     for j in i:
     #         print(j)
+    final_indexes=[]
+    final_indexes+=(get_indexes_from_grid(nums_as_grids[0],0))
+    final_indexes+=(get_indexes_from_grid(nums_as_grids[1],5))
+    final_indexes+=(get_indexes_from_grid(nums_as_grids[2],12))
+    final_indexes+=(get_indexes_from_grid(nums_as_grids[3],17))
+    print(final_indexes)
 
+
+def get_indexes_from_grid(grid,offset):
+    indexes=[]
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            if(grid[i][j]==1):
+                indexes.append(index_to_2d(j+offset,i,21,7,3))
+
+    return indexes
 
 def get_nums_as_grids(t):
     nums_as_grids = []
