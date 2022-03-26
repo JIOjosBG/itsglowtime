@@ -13,15 +13,60 @@ def main_hardware_loop():
 
 
 def display_time(t):
-    print(t)
+    t_as_string = str(t)[11:13]+str(t)[14:16]
+    nums_as_grids = get_nums_as_grids(t_as_string)
+    # for i in nums_as_grids:
+    #     print('\n')
+    #     for j in i:
+    #         print(j)
 
+
+def get_nums_as_grids(t):
+    nums_as_grids = []
+    #print(t)
+    for n in t:
+        nums_as_grids.append(get_num_as_grid(int(n)))
+    return nums_as_grids
+
+def get_num_as_grid(n):
+    grid=[]
+    for i in range(7):
+        grid.append([0,0,0,0])
+    current_num_as_7_segment = nums_as_7_segment[n]
+
+    for i in range(len(current_num_as_7_segment)):
+        if current_num_as_7_segment[i]==1:
+            if i==0:
+                for j in range(4):
+                    grid[0][j]=1
+            elif i==1:
+                for j in range(4):
+                    grid[j][3]=1
+            elif i==2:
+                for j in range(4):
+                    grid[j+3][3]=1
+            elif i==3:
+                for j in range(4):
+                    grid[6][j]=1
+            elif i==4:
+                for j in range(4):
+                    grid[j+3][0]=1
+            elif i==5:
+                for j in range(4):
+                    grid[j][0]=1
+            elif i==6:
+                for j in range(4):
+                    grid[3][j]=1
+
+    return grid
 
 def get_next_alarm():
     with open('reciever/alarms_data.json', 'r') as f:
         data = json.load(f)[0]
+        #da se napravi da e pyrvata sledvashta a ne prosto pyrvata
     return data
 
-    
+
 def clock_loop():
 
     time.sleep(1)
