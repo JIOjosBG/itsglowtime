@@ -11,6 +11,7 @@
 ## Използвани технологии
 
 * [Django](https://www.djangoproject.com/) - *framework за backend на сайтове*
+* [Django REST Framework](https://www.django-rest-framework.org/) - *framework за изграждане на API*
 * [Raspberry Pi](https://www.raspberrypi.org/) - *Едноплатков мини компютър*
 * LED ленти WS2812 *LED ленти, разрешаващи индивидуалното адресиране на диодите*
 
