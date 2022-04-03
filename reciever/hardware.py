@@ -2,6 +2,9 @@
 import time
 from datetime import datetime
 import json
+import board
+import neopixel
+
 def main_hardware_loop():
     while(1):
         time.sleep(5)
@@ -24,8 +27,23 @@ def display_time(t):
     final_indexes+=(get_indexes_from_grid(nums_as_grids[1],5))
     final_indexes+=(get_indexes_from_grid(nums_as_grids[2],12))
     final_indexes+=(get_indexes_from_grid(nums_as_grids[3],17))
-    print(final_indexes)
+    indexes_to_ws2812(final_indexes)
 
+
+def indexes_to_ws2812(indexes):
+    pixel_pin = board.D18
+    num_pixels = 150
+    ORDER = neopixel.GRB
+
+    pixels = neopixel.NeoPixel(
+    pixel_pin, num_pixels, brightness=1)
+    while(1):
+        for j in indexes:
+            pixels[j]=[255,255,255]
+        pixels.show()
+        time.sleep(1)
+        pixels.fill((0,0,0))
+        time.sleep(1)
 
 def get_indexes_from_grid(grid,offset):
     indexes=[]
