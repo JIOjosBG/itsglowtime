@@ -5,7 +5,7 @@ import time
 
 def get_alarms():
     try:
-        response = requests.get("http://localhost:8000/api/alarm-list/")
+        response = requests.get("http://172.104.240.173/api/alarm-list/")
     except requests.ConnectionError as e:
         print (e)
         return [{"id": 2, "title": "test", "time": "15:45:58", "added_at": "2022-03-23T06:30:00+02:00"}]
