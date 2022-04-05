@@ -6,13 +6,36 @@ import board
 import neopixel
 
 def main_hardware_loop():
+    time.sleep(5)
     while(1):
-        time.sleep(5)
         now = datetime.now()
+        time.sleep(5)
         next_alarm=get_next_alarm()
-        #if(next_alarm.minute==now.minute and next_alarm.hour == now.hour):
-        if 1: #proverka dali e vreme za alarma
-            display_time(now)
+        if(int(next_alarm['time'][3:5])==int(now.minute) and next_alarm['time'][0:2] == str(now.hour)):
+            #print("now")
+            next_alarm=get_next_alarm()
+            for i in range(25):
+                display_time(now)
+
+def get_next_alarm():
+    with open('/home/pi/Documents/itsglowtime/reciever/alarms_data.json', 'r') as f:
+        data = json.load(f)
+        #print(data)
+        now = datetime.now().time()
+        #now.second=59
+        for i in data:
+            alarm = datetime.strptime(i['time'], '%H:%M:%S').time()
+            #da se opravi!
+            if alarm.hour > now.hour:
+                #print(i)
+                return i
+            elif alarm.hour == now.hour and alarm.minute>=now.minute:
+                #print(i)
+                return i
+        print("no future alarms")
+        return data[0]
+        #da se napravi da e pyrvata sledvashta a ne prosto pyrvata
+    #return data
 
 
 def display_time(t):
@@ -37,9 +60,12 @@ def indexes_to_ws2812(indexes):
 
     pixels = neopixel.NeoPixel(
     pixel_pin, num_pixels, brightness=1)
-    while(1):
+    for i in [34,55,97,118]:
+        indexes.append(i)
+    for i in range(1):
         for j in indexes:
-            pixels[j]=[255,255,255]
+            pixels[j]=[33, 122, 85]
+            time.sleep(0.02)
         pixels.show()
         time.sleep(1)
         pixels.fill((0,0,0))
@@ -92,13 +118,6 @@ def get_num_as_grid(n):
                     grid[3][j]=1
 
     return grid
-
-def get_next_alarm():
-    with open('reciever/alarms_data.json', 'r') as f:
-        data = json.load(f)[0]
-        #da se napravi da e pyrvata sledvashta a ne prosto pyrvata
-    return data
-
 
 def clock_loop():
 
