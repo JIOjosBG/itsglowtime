@@ -94,7 +94,7 @@ def get_num_as_grid(n):
     return grid
 
 def get_next_alarm():
-    with open('reciever/alarms_data.json', 'r') as f:
+    with open('~/Documents/itsglowtime/reciever/alarms_data.json', 'r') as f:
         data = json.load(f)[0]
         #da se napravi da e pyrvata sledvashta a ne prosto pyrvata
     return data
