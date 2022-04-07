@@ -12,7 +12,7 @@ def get_alarms():
     parsed = response.json()
     return parsed
 def save_to_file():
-    with open('~/Documents/itsglowtime/reciever/alarms_data.json', 'w') as outfile:
+    with open('/home/pi/Documents/itsglowtime/reciever/alarms_data.json', 'w') as outfile:
         print("fetched")
         alarms_json = (get_alarms())
         json.dump(alarms_json, outfile)
