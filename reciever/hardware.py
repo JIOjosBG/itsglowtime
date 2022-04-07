@@ -11,8 +11,10 @@ def main_hardware_loop():
         now = datetime.now()
         time.sleep(5)
         next_alarm=get_next_alarm()
-        if(int(next_alarm['time'][3:5])==int(now.minute) and next_alarm['time'][0:2] == str(now.hour)):
-            #print("now")
+        print(next_alarm)
+
+        if(int(next_alarm['time'][3:5])==int(now.minute) and int(next_alarm['time'][0:2]) == int(now.hour)):
+            print("now")
             next_alarm=get_next_alarm()
             for i in range(25):
                 display_time(now)
