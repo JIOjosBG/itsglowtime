@@ -12,6 +12,8 @@ def apiOverview(request):
     api_urls = {
         'List': '/alarm-list/',
         'Next': '/alarm-next/',
+        'Create': '/alarm-create/',
+        'Delete': '/alarm-delete/<pk>',
     }
     
     return Response(api_urls)
@@ -30,3 +32,22 @@ def alarmNext(request):
     print(datetime.now())
     serializer = AlarmSerializer(alarm,many=False)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def alarmCreate(request):
+    serializer = AlarmSerializer(data = request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        print(request.data)
+    #serializer = AlarmSerializer(alarm,many=False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def alarmDelete(request,pk):
+    alarm = Alarm.objects.get(id=pk)
+    alarm.delete()
+    print("watafak")
+
+    return Response("deleted")
