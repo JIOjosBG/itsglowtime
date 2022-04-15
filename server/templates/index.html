@@ -3,57 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>It's glow time</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
-<body>
-    <h1>Helllo</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
+<body class="bg-dark">
+    <div class="container bg-dark ">
+        <div class="m-3" 
+        style="
+        border-style:double; 
+        border-color: #fff;
+        border-width: 10px;
+        ">   
+            <form class="text-light p-4 text h2" action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p}}
+                <input type="submit">
+            </form>
+        </div>
+        <div class="row bg-dark">
         {% for alarm in alarms %}
-            <div style="border-style:double; border-color: {{ alarm.color }};">
+        <div class="col-5 m-4" 
+        style="
+        border-style:double; 
+        border-color: {{ alarm.color }};
+        border-width: 10px;
+        ">
+            <div class="text-light m-4" >
                 <h1>{{ alarm.time }}</h1>
                 <h2>{{ alarm.title }}</h2>
             </div>
+        </div>
         {% endfor %}
-        <input type="submit">
-    </form>
+
+    </div>
+</div>
 </body>
 <script>
     document.getElementById("id_color").type = "color";
     document.getElementById("id_time").type = "time";
 </script>
-<!-- <script>
-    function getData(){
-        let title = document.getElementById('title').value;
-        let time = document.getElementById('time').value;
-        let color = document.getElementById('color').value;
-        // console.log(title)
-        // console.log(time)
-        // console.log(color)
-        let red = parseInt(color.substring(1,3), 16);
-        let green = parseInt(color.substring(3,5), 16);
-        let blue = parseInt(color.substring(5,7), 16);
-        // console.log([red,green,blue])
-        let send = {
-            "title": title,
-            "time": time,
-            "red": red,
-            "green": green,
-            "blue": blue
-        }
-        data = JSON.stringify(send)
-        console.log(data)
-        fetch('http://172.104.240.173/api/alarm-create', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            body: data
-        })
-        .then(res => res.json())
-        .then(res => console.log(res));
-    console.log(send)
-    }
-</script> -->
 </html>
