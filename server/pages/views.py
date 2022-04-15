@@ -7,9 +7,10 @@ def homepage(request):
     #return HttpResponse("asdasd")
     if request.method == "POST":
         form = AlarmForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
-
+        else:
+            print("ad")
         form = AlarmForm()
     alarms = Alarm.objects.all()
     context={'form':form,"alarms":alarms}
