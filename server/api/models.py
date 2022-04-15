@@ -4,7 +4,7 @@ from colorfield.fields import ColorField
 
 class Alarm(models.Model):
     title = models.CharField(max_length=100)
-    time = models.TimeField(db_index = True, auto_now=False, auto_now_add=False)
+    time = models.TimeField(db_index = True, auto_now=False, auto_now_add=False, unique = True)
     added_at = models.DateTimeField(default=timezone.now)
     color = ColorField(default='#52E8FF')
 
