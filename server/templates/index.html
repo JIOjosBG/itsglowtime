@@ -6,14 +6,14 @@
 </head>
 <body>
     <h1>Helllo</h1>
-    <form id="alarm-form" action="#" onsubmit="getData();return false">
-        <input required="required" id="title" name="title" placeholder="Name of alarm" />
-        <input required="required" id="time" type="time" name="time" />
-        <input required="required" id="color" type="color" name="color"/>
-        <button> Submit </button>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        <input type="submit">
     </form>
 </body>
-<script>
+<!-- <script>
     function getData(){
         let title = document.getElementById('title').value;
         let time = document.getElementById('time').value;
@@ -46,5 +46,5 @@
         .then(res => console.log(res));
     console.log(send)
     }
-</script>
+</script> -->
 </html>
