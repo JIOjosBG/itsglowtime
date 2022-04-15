@@ -19,10 +19,11 @@ def save_to_file():
     
 def loop_for_checks_of_time():
     while(1):
-        time.sleep(1)
-        now = datetime.now()
-        if(now.minute%5==0 and now.second==0):
-        #if(now.second%5==0):
-            save_to_file()
-        #exit()
-         
+        try:
+            time.sleep(1)
+            now = datetime.now()
+            if(now.minute%5==0 and now.second==0):
+            #if(now.second%5==0):
+                save_to_file()
+            #exit()
+        except Exception as e: print(e)         

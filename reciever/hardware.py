@@ -8,16 +8,27 @@ import neopixel
 def main_hardware_loop():
     time.sleep(5)
     while(1):
-        now = datetime.now()
-        time.sleep(5)
-        next_alarm=get_next_alarm()
-        print(next_alarm)
-
-        if(int(next_alarm['time'][3:5])==int(now.minute) and int(next_alarm['time'][0:2]) == int(now.hour)):
-            print("now")
+        try:
+            now = datetime.now()
+            time.sleep(5)
             next_alarm=get_next_alarm()
-            for i in range(25):
-                display_time(now)
+            print(next_alarm)
+
+            if(int(next_alarm['time'][3:5])==int(now.minute) and int(next_alarm['time'][0:2]) == int(now.hour)):
+                print("now")
+                next_alarm=get_next_alarm()
+                for i in range(25):
+                    now = datetime.now()
+
+                    hex_color = next_alarm['color']
+                    red = int(hex_color[1:3],16)
+                    green = int(hex_color[3:5],16)
+                    blue = int(hex_color[5:7],16)
+                    color = [red,green,blue]
+                    
+                    display_time(now,color)
+        except Exception as e: print(e)
+
 
 def get_next_alarm():
     with open('/home/pi/Documents/itsglowtime/reciever/alarms_data.json', 'r') as f:
@@ -40,7 +51,7 @@ def get_next_alarm():
     #return data
 
 
-def display_time(t):
+def display_time(t,c):
     t_as_string = str(t)[11:13]+str(t)[14:16]
     nums_as_grids = get_nums_as_grids(t_as_string)
     # for i in nums_as_grids:
@@ -52,10 +63,10 @@ def display_time(t):
     final_indexes+=(get_indexes_from_grid(nums_as_grids[1],5))
     final_indexes+=(get_indexes_from_grid(nums_as_grids[2],12))
     final_indexes+=(get_indexes_from_grid(nums_as_grids[3],17))
-    indexes_to_ws2812(final_indexes)
+    indexes_to_ws2812(final_indexes,c)
 
 
-def indexes_to_ws2812(indexes):
+def indexes_to_ws2812(indexes,c):
     pixel_pin = board.D18
     num_pixels = 150
     ORDER = neopixel.GRB
@@ -66,7 +77,7 @@ def indexes_to_ws2812(indexes):
         indexes.append(i)
     for i in range(1):
         for j in indexes:
-            pixels[j]=[33, 122, 85]
+            pixels[j]=c
             time.sleep(0.02)
         pixels.show()
         time.sleep(1)
