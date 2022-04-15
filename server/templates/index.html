@@ -6,5 +6,21 @@
 </head>
 <body>
     <h1>Helllo</h1>
+    <form id="alarm-form" action="#" onsubmit="getData();return false">
+        <input id="title" name="title" placeholder="Name of alarm" />
+        <input id="time" type="time" name="time" />
+        <input id="color" type="color" name="c"/>
+        <button> Submit </button>
+    </form>
 </body>
+<script>
+    function getData(){
+        let title = document.getElementById('title').value;
+        let time = document.getElementById('time').value;
+        let color = document.getElementById('color').value;
+        console.log(title)
+        console.log(time)
+        console.log(color)
+    }
+</script>
 </html>
