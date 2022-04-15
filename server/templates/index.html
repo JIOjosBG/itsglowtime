@@ -32,14 +32,15 @@
             "green": green,
             "blue": blue
         }
-
+        data = JSON.stringify(send)
+        console.log(data)
         fetch('http://172.104.240.173/api/alarm-create', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(send)
+            body: data
         })
         .then(res => res.json())
         .then(res => console.log(res));
