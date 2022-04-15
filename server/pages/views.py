@@ -1,7 +1,7 @@
 from django.shortcuts import render
 # Create your views here.
 from .forms import AlarmForm
-
+from api.models import Alarm
 def homepage(request):
     form = AlarmForm()
     #return HttpResponse("asdasd")
@@ -11,7 +11,7 @@ def homepage(request):
             form.save()
 
         form = AlarmForm()
-
-    context={'form':form}
+    alarms = Alarm.objects.all()
+    context={'form':form,"alarms":alarms}
 
     return render(request,'index.html',context)

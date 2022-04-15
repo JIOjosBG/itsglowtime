@@ -9,13 +9,17 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ form }}
-
+        {% for alarm in alarms %}
+            <div style="border-style:double; border-color: {{ alarm.color }};">
+                <h1>{{ alarm.time }}</h1>
+                <h2>{{ alarm.title }}</h2>
+            </div>
+        {% endfor %}
         <input type="submit">
     </form>
 </body>
 <script>
     document.getElementById("id_color").type = "color";
-
     document.getElementById("id_time").type = "time";
 </script>
 <!-- <script>
