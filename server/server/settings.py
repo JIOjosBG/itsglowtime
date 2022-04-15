@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'pages',
 
     'rest_framework',
-    'corsheaders'
+    #'corsheaders'
 ]
 
 # REST_FRAMEWORK = {
@@ -55,7 +55,9 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+
+    #'corsheaders.middleware.CorsMiddleware',
+    
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -66,8 +68,8 @@ MIDDLEWARE = [
 # CORS_ALLOWED_ORIGINS = [
 #     r"^*",
 # ]
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'server.urls'
 
 TEMPLATES = [
